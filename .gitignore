@@ -1,3 +1,13 @@
+# dependencies
 /node_modules
+
+#production
 /build
-Archive.zip
+
+# enviroment
+.env
+.env.local
+
+# lock files
+yarn.lock
+package-lock.json

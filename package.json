@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "run-p serv watch",
-    "serv": "servor . index.html 3000 --reload",
-    "watch": "webpack --watch"
+    "dev": "run-p serve watch",
+    "serve": "servor public index.html 3000 --reload",
+    "watch": "webpack --watch",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -19,17 +20,11 @@
     "url": "https://github.com/devferx/mentoria-shopping-cart-spa/issues"
   },
   "homepage": "https://github.com/devferx/mentoria-shopping-cart-spa#readme",
-  "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
+  "dependencies": {},
+  "devDependencies": {
     "npm-run-all": "^4.1.5",
     "servor": "^4.0.2",
-    "webpack": "^5.26.3"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "babel-loader": "^8.2.2",
+    "webpack": "^5.26.3",
     "webpack-cli": "^4.5.0"
   }
 }

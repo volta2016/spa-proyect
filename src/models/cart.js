@@ -1,14 +1,12 @@
-import renderProductCart from '../utils/renderProductCart.js';
-import removeAllChildNodes from '../utils/removeAllChildNodes.js';
+import renderProductCart from "../utils/renderProductCart";
+import removeAllChildNodes from "../utils/removeAllChildNodes";
 
-const cartDOM = document.querySelector('.cart__center');
-const itemsTotal = document.querySelector('.item__total');
-const cartTotal = document.querySelector('.cart__total');
-const clearCart = document.querySelector('.clear__cart');
+const cartDOM = document.querySelector(".cart__center");
+const itemsTotal = document.querySelector(".item__total");
+const cartTotal = document.querySelector(".cart__total");
+const clearCart = document.querySelector(".clear__cart");
 
 export default class Cart {
-  
-
   constructor() {
     this.totalPrice = 0;
     this.totalProducts = 0;
@@ -17,6 +15,11 @@ export default class Cart {
 
     // Event Listeners
     this.addCleanCartEvent();
+
+    this.removeItem = this.removeItem.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
+    this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
   }
 
   // Principal
@@ -41,10 +44,21 @@ export default class Cart {
     this.renderItem(item);
   }
 
+  removeItem(id) {
+    const productToDelete = this.items.get(id);
+
+    this.totalPrice -= productToDelete.amount * productToDelete.price;
+    this.totalProducts -= productToDelete.amount;
+
+    this.deleteDisplayItem(id);
+    this.items.delete(id);
+    this.setItemValues();
+  }
+
   // Crea los elementos necesarios del Modal + eventos listeners
   createItem(id, title, image, price, amount) {
-    let modal = document.createElement('div');
-    modal.classList.add('cart__item');
+    let modal = document.createElement("div");
+    modal.classList.add("cart__item");
     modal.id = `product-${id}`;
     modal.innerHTML = renderProductCart(id, title, image, price, amount);
 
@@ -53,18 +67,18 @@ export default class Cart {
     const removeButton = modal.querySelector(`#remove-${id}`);
 
     // Listeners
-    removeButton.addEventListener('click', () => this.removeItem(id));
+    removeButton.addEventListener("click", () => this.removeItem(id));
 
-    increaseButton.addEventListener('click', () =>
-      this.handleUpdateButton(id, 'increase')
+    increaseButton.addEventListener("click", () =>
+      this.handleUpdateButton(id, "increase")
     );
 
-    decreaseButton.addEventListener('click', (event) => {
+    decreaseButton.addEventListener("click", () => {
       const { amount: currentAmount } = this.items.get(id);
       // const amount = this.items.get(id);
       // const currentAmount = amount;
 
-      this.handleUpdateButton(id, 'decrease');
+      this.handleUpdateButton(id, "decrease");
       // if (currentAmount - 1 === 0) {
       //   this.removeItem(id);
       // }
@@ -77,12 +91,12 @@ export default class Cart {
   handleUpdateButton(id, operation) {
     const toUpdate = this.items.get(id);
     switch (operation) {
-      case 'increase':
+      case "increase":
         this.totalPrice += toUpdate.price;
         this.totalProducts++;
         this.updateAmountItem(id, toUpdate.amount + 1);
         return this.setItemValues();
-      case 'decrease':
+      case "decrease":
         this.totalPrice -= toUpdate.price;
         this.totalProducts--;
         this.updateAmountItem(id, toUpdate.amount - 1);
@@ -91,21 +105,9 @@ export default class Cart {
         return;
     }
   }
-
-  removeItem = (id) => {
-    const productToDelete = this.items.get(id);
-
-    this.totalPrice -= productToDelete.amount * productToDelete.price;
-    this.totalProducts -= productToDelete.amount;
-
-    this.deleteDisplayItem(id);
-    this.items.delete(id);
-    this.setItemValues();
-  };
-
   /* Agregar el escuchador del evento click en clearCartButton */
   addCleanCartEvent() {
-    clearCart.addEventListener('click', () => {
+    clearCart.addEventListener("click", () => {
       this.totalPrice = 0;
       this.totalProducts = 0;
 
@@ -151,6 +153,6 @@ export default class Cart {
   }
 
   logger() {
-    console.log('Carrito de compras', this.items);
+    console.log("Carrito de compras", this.items);
   }
 }
