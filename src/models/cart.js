@@ -7,152 +7,148 @@ const cartTotal = document.querySelector(".cart__total");
 const clearCart = document.querySelector(".clear__cart");
 
 export default class Cart {
-  constructor() {
-    this.totalPrice = 0;
-    this.totalProducts = 0;
-    this.items = new Map(); // lista de compras {llave: valor}
-    // this.items.get(key) => devolver el valor
+	constructor() {
+		this.totalPrice = 0;
+		this.totalProducts = 0;
+		this.items = new Map(); // lista de compras {llave: valor}
+		// this.items.get(key) => devolver el valor
 
-    // Event Listeners
-    this.addCleanCartEvent();
+		// Event Listeners
+		this.addCleanCartEvent();
 
-    this.removeItem = this.removeItem.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
-    this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
-  }
+		this.removeItem = this.removeItem.bind(this);
+		this.addItem = this.addItem.bind(this);
+		this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
+		this.deleteDisplayItem = this.deleteDisplayItem.bind(this);
+	}
 
-  // Principal
-  /**
-   * ADD Item => Hacer la logica del Mapa (agrega) o Revisar si existe
-   *    Si no existe => renderItem (agregarlo en el DOM)
-   *    renderItem => llama a createItem (crea un molde y agrega listeners)
-   */
-  addItem(item) {
-    const existingProduct = this.items.get(item.id);
+	// Principal
+	/**
+	 * ADD Item => Hacer la logica del Mapa (agrega) o Revisar si existe
+	 *    Si no existe => renderItem (agregarlo en el DOM)
+	 *    renderItem => llama a createItem (crea un molde y agrega listeners)
+	 */
+	addItem(item) {
+		const existingProduct = this.items.get(item.id);
 
-    this.totalPrice += item.price;
-    this.totalProducts++;
+		this.totalPrice += item.price;
+		this.totalProducts++;
 
-    if (existingProduct) {
-      const currentAmount = existingProduct.amount;
+		if (existingProduct) {
+			const currentAmount = existingProduct.amount;
 
-      return this.updateAmountItem(item.id, currentAmount + 1);
-    }
+			return this.updateAmountItem(item.id, currentAmount + 1);
+		}
 
-    this.items.set(item.id, item);
-    this.renderItem(item);
-  }
+		this.items.set(item.id, item);
+		this.renderItem(item);
+	}
 
-  removeItem(id) {
-    const productToDelete = this.items.get(id);
+	removeItem(id) {
+		const productToDelete = this.items.get(id);
 
-    this.totalPrice -= productToDelete.amount * productToDelete.price;
-    this.totalProducts -= productToDelete.amount;
+		this.totalPrice -= productToDelete.amount * productToDelete.price;
+		this.totalProducts -= productToDelete.amount;
 
-    this.deleteDisplayItem(id);
-    this.items.delete(id);
-    this.setItemValues();
-  }
+		this.deleteDisplayItem(id);
+		this.items.delete(id);
+		this.setItemValues();
+	}
 
-  // Crea los elementos necesarios del Modal + eventos listeners
-  createItem(id, title, image, price, amount) {
-    let modal = document.createElement("div");
-    modal.classList.add("cart__item");
-    modal.id = `product-${id}`;
-    modal.innerHTML = renderProductCart(id, title, image, price, amount);
+	// Crea los elementos necesarios del Modal + eventos listeners
+	createItem(id, title, image, price, amount) {
+		let modal = document.createElement("div");
+		modal.classList.add("cart__item");
+		modal.id = `product-${id}`;
+		modal.innerHTML = renderProductCart(id, title, image, price, amount);
 
-    const increaseButton = modal.querySelector(`.increase`);
-    const decreaseButton = modal.querySelector(`.decrease`);
-    const removeButton = modal.querySelector(`#remove-${id}`);
+		const increaseButton = modal.querySelector(`.increase`);
+		const decreaseButton = modal.querySelector(`.decrease`);
+		const removeButton = modal.querySelector(`#remove-${id}`);
 
-    // Listeners
-    removeButton.addEventListener("click", () => this.removeItem(id));
+		// Listeners
+		removeButton.addEventListener("click", () => this.removeItem(id));
 
-    increaseButton.addEventListener("click", () =>
-      this.handleUpdateButton(id, "increase")
-    );
+		increaseButton.addEventListener("click", () =>
+			this.handleUpdateButton(id, "increase")
+		);
 
-    decreaseButton.addEventListener("click", () => {
-      const { amount: currentAmount } = this.items.get(id);
-      // const amount = this.items.get(id);
-      // const currentAmount = amount;
+		decreaseButton.addEventListener("click", () => {
+			const { amount: currentAmount } = this.items.get(id);
+			// const amount = this.items.get(id);
+			// const currentAmount = amount;
 
-      this.handleUpdateButton(id, "decrease");
-      // if (currentAmount - 1 === 0) {
-      //   this.removeItem(id);
-      // }
-      currentAmount - 1 === 0 && this.removeItem(id);
-    });
+			this.handleUpdateButton(id, "decrease");
+			// if (currentAmount - 1 === 0) {
+			//   this.removeItem(id);
+			// }
+			currentAmount - 1 === 0 && this.removeItem(id);
+		});
 
-    return modal;
-  }
+		return modal;
+	}
 
-  handleUpdateButton(id, operation) {
-    const toUpdate = this.items.get(id);
-    switch (operation) {
-      case "increase":
-        this.totalPrice += toUpdate.price;
-        this.totalProducts++;
-        this.updateAmountItem(id, toUpdate.amount + 1);
-        return this.setItemValues();
-      case "decrease":
-        this.totalPrice -= toUpdate.price;
-        this.totalProducts--;
-        this.updateAmountItem(id, toUpdate.amount - 1);
-        return this.setItemValues();
-      default:
-        return;
-    }
-  }
-  /* Agregar el escuchador del evento click en clearCartButton */
-  addCleanCartEvent() {
-    clearCart.addEventListener("click", () => {
-      this.totalPrice = 0;
-      this.totalProducts = 0;
+	handleUpdateButton(id, operation) {
+		const toUpdate = this.items.get(id);
+		switch (operation) {
+			case "increase":
+				this.totalPrice += toUpdate.price;
+				this.totalProducts++;
+				this.updateAmountItem(id, toUpdate.amount + 1);
+				return this.setItemValues();
+			case "decrease":
+				this.totalPrice -= toUpdate.price;
+				this.totalProducts--;
+				this.updateAmountItem(id, toUpdate.amount - 1);
+				return this.setItemValues();
+			default:
+				return;
+		}
+	}
+	/* Agregar el escuchador del evento click en clearCartButton */
+	addCleanCartEvent() {
+		clearCart.addEventListener("click", () => {
+			this.totalPrice = 0;
+			this.totalProducts = 0;
 
-      this.items = new Map();
+			this.items = new Map();
 
-      this.deleteDisplayAllItems();
-      this.setItemValues();
-    });
-  }
+			this.deleteDisplayAllItems();
+			this.setItemValues();
+		});
+	}
 
-  // Render Operations(lógica de productos)
+	// Render Operations(lógica de productos)
 
-  // Agrega en el Modal el producto
-  renderItem({ id, title, image, price, amount }) {
-    cartDOM.append(this.createItem(id, title, image, price, amount));
-  }
+	// Agrega en el Modal el producto
+	renderItem({ id, title, image, price, amount }) {
+		cartDOM.append(this.createItem(id, title, image, price, amount));
+	}
 
-  // Actualiza el input de producto ya añadido en el modal suma o resta el product
-  // dependiendo el caso
-  updateAmountItem(id, newAmount) {
-    const toUpdate = this.items.get(id);
-    this.items.set(id, { ...toUpdate, amount: newAmount });
-    //actualiza y agrega los elementos expandiendo con ...spread
+	// Actualiza el input de producto ya añadido en el modal suma o resta el product
+	// dependiendo el caso
+	updateAmountItem(id, newAmount) {
+		const toUpdate = this.items.get(id);
+		this.items.set(id, { ...toUpdate, amount: newAmount });
+		//actualiza y agrega los elementos expandiendo con ...spread
 
-    const input = cartDOM.querySelector(`#product-${id} input.item__amount`);
-    input.value = newAmount.toString();
-  }
+		const input = cartDOM.querySelector(`#product-${id} input.item__amount`);
+		input.value = newAmount.toString();
+	}
 
-  // Busca en el dom el Id y lo remueve
-  deleteDisplayItem(id) {
-    cartDOM.querySelector(`#product-${id}`).remove();
-  }
+	// Busca en el dom el Id y lo remueve
+	deleteDisplayItem(id) {
+		cartDOM.querySelector(`#product-${id}`).remove();
+	}
 
-  // borra todos los elementos del modal y actualiza el valor
-  deleteDisplayAllItems() {
-    removeAllChildNodes(cartDOM);
-  }
+	// borra todos los elementos del modal y actualiza el valor
+	deleteDisplayAllItems() {
+		removeAllChildNodes(cartDOM);
+	}
 
-  // Actualiza en el DOM los valores de cantidad y precio total
-  setItemValues() {
-    itemsTotal.innerText = this.totalProducts;
-    cartTotal.innerText = parseFloat(this.totalPrice.toFixed(2));
-  }
-
-  logger() {
-    console.log("Carrito de compras", this.items);
-  }
+	// Actualiza en el DOM los valores de cantidad y precio total
+	setItemValues() {
+		itemsTotal.innerText = this.totalProducts;
+		cartTotal.innerText = parseFloat(this.totalPrice.toFixed(2));
+	}
 }
