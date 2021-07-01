@@ -1,30 +1,30 @@
 {
-  "name": "mentoria-shopping-cart-spa",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "run-p serve watch",
-    "serve": "servor public index.html 3000 --reload",
-    "watch": "webpack --watch",
-    "build": "webpack --mode=production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/devferx/mentoria-shopping-cart-spa.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/devferx/mentoria-shopping-cart-spa/issues"
-  },
-  "homepage": "https://github.com/devferx/mentoria-shopping-cart-spa#readme",
-  "dependencies": {},
-  "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "servor": "^4.0.2",
-    "webpack": "^5.26.3",
-    "webpack-cli": "^4.5.0"
-  }
+	"name": "mentoria-shopping-cart-spa",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "run-p serve watch",
+		"serve": "servor public index.html 3000 --reload",
+		"watch": "webpack --watch",
+		"build": "webpack --mode=production"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volta2016/spa-proyect"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/volta2016/spa-proyectissues"
+	},
+	"homepage": "https://github.com/volta2016/spa-proyect",
+	"dependencies": {},
+	"devDependencies": {
+		"npm-run-all": "^4.1.5",
+		"servor": "^4.0.2",
+		"webpack": "^5.26.3",
+		"webpack-cli": "^4.5.0"
+	}
 }
