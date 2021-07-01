@@ -3,7 +3,10 @@ import Products from "./models/products";
 import Storage from "./utils/storage";
 import renderProduct from "./utils/renderProduct";
 
-// TODO: implementar el Storage
+// date
+const date = document.querySelector("#date");
+date.innerHTML = `© Copyright
+				${new Date().getFullYear()} Ecommerce Dulzor Kimei`;
 
 /** Extacción del DOM */
 const openCart = document.querySelector(".cart__icon");
