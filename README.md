@@ -9,9 +9,14 @@
 - DOM manipulation
 - modal animations with CSS
 - Movie finder
+- Responsive design
+
+url [see project]().
 
 ## SPA Capture
 
-![screenshot]()
+![screenshot](https://raw.githubusercontent.com/volta2016/spa-proyect/main/public/images/screen-1.png?token=AE7I7SD5BS6NXJUMV4SXZWTA3X2MQ)
 
-url [see project](https://volta2016.github.io/jquery-to-js-spa/).
+![screenshot](https://raw.githubusercontent.com/volta2016/spa-proyect/main/public/images/screen-2.png?token=AE7I7SCSVLJT2PATART5MYTA3X2O4)
+
+![screenshot](https://raw.githubusercontent.com/volta2016/spa-proyect/main/public/images/screen-3.png?token=AE7I7SALPKHFHENNEHVUXNDA3X2SY)
