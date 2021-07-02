@@ -5,13 +5,12 @@
 - Teamwork for development
 - POO ( object oriented programming with JavaScript)
 - Webpack build tool (module packer)
-- Products json format
+- Products JSON format
 - DOM manipulation
 - modal animations with CSS
-- Movie finder
 - Responsive design
 
-url [see project]().
+url [see project](https://ecommerce-dulzorkimey.netlify.app/).
 
 ## SPA Capture
 
