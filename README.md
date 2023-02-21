@@ -34,7 +34,7 @@ npm run dev
 - Responsive design
 - Logo illustrated by me
 
-url [see project](https://ecommerce-dulzorkimey.netlify.app/).
+url [see project](https://e-commerce-dulzorkimey.netlify.app/).
 
 ## SPA Capture
 
