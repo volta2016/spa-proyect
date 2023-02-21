@@ -11,9 +11,9 @@ use the next script:
     run-p serve watch
   npm run serve
     servor public index.html 3000 --reload
-  watch
+  npm runwatch
     webpack --watch
-  build
+  npm run build
     webpack --mode=production
 ```
 
