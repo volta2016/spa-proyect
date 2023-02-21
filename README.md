@@ -1,6 +1,7 @@
 # SPA Proyect Ecommerce
 
-E-commerce creado con POO JS, configuración con Webpack.
+Ecommerce created with POO JS, configuration with Webpack.
+Separation of tasks by modules.
 
 ## Scripts available in Shopping-cart-spa via `npm run-script`
 
