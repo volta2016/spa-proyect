@@ -1,5 +1,28 @@
 # SPA Proyect Ecommerce
 
+E-commerce creado con POO JS, configuración con Webpack.
+
+## Scripts available in Shopping-cart-spa via `npm run-script`
+
+use the next script:
+
+```bash
+  npm run dev
+    run-p serve watch
+  npm run serve
+    servor public index.html 3000 --reload
+  watch
+    webpack --watch
+  build
+    webpack --mode=production
+```
+
+example:
+
+```bash
+npm run dev
+```
+
 ### SPA feature
 
 - Teamwork for development
@@ -9,6 +32,7 @@
 - DOM manipulation
 - modal animations with CSS
 - Responsive design
+- Logo illustrated by me
 
 url [see project](https://ecommerce-dulzorkimey.netlify.app/).
 

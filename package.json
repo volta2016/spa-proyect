@@ -1,7 +1,7 @@
 {
-	"name": "mentoria-shopping-cart-spa",
+	"name": "shopping-cart-spa",
 	"version": "1.0.0",
-	"description": "",
+	"description": "E-commerce creado con POO JS, configuración con Webpack.",
 	"main": "index.js",
 	"scripts": {
 		"dev": "run-p serve watch",

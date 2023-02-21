@@ -35,7 +35,6 @@ const renderProduct = (id, title, price, image) => `
         <div class="bottom">
           <div class="btn__group">
             <button class="btn addToCart" data-id=${id}>Add to Cart</button>
-            <button class="btn view">View</button>
           </div>
           <div class="price">$${price}</div>
         </div>
